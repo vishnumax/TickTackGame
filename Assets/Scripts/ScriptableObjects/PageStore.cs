@@ -15,7 +15,7 @@ public class PageStore : ScriptableObject
 
 }
 
-public enum PageSet {Splash,Game}
+public enum PageSet {Splash,level,Game}
 
 
 [System.Serializable]

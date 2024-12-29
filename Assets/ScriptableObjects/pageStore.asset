@@ -15,3 +15,5 @@ MonoBehaviour:
   pages:
   - panel: {fileID: 28839686930915712, guid: 5bf6296f896b03a429d0533372dfa39a, type: 3}
     pageSet: 0
+  - panel: {fileID: 560495542497762640, guid: e42f9e6ffa8af4f48842fa04169b15fa, type: 3}
+    pageSet: 0

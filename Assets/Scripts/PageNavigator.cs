@@ -11,7 +11,8 @@ public class PageNavigator : MonoBehaviour
     [Header("PageStore")]
     [SerializeField] PageStore pageStore;
 
-    public Transform pageParent;
+    [Space]
+    [SerializeField] Transform pageParent;
 
     List<Page> currentPages = new List<Page>();
 
@@ -22,8 +23,16 @@ public class PageNavigator : MonoBehaviour
             instance = this;
     }
 
+    private void Start()
+    {
+        NavAction(PageSet.Splash);
+        StatusManager.Instance.Message("Loading...");
+    }
+
     public void NavAction(PageSet page)
     {
+        StatusManager.Instance.Message("");
+
         if (pageParent.childCount > 0)
         {
             for (int i = 0; i < pageParent.childCount; i++)
@@ -57,6 +66,19 @@ public class PageNavigator : MonoBehaviour
 
         go.transform.localScale = Vector3.one;
         go.transform.position = Vector3.zero;
+        go.SetActive(true);
+
+        RectTransform rectGo = go.GetComponent<RectTransform>();
+        // rectGo.anchorMin = new Vector2(0, 0f);
+        //rectGo.anchorMax = new Vector2(0, 0f);
+
+        rectGo.offsetMin = new Vector2(0, rectGo.offsetMin.y);
+        rectGo.offsetMax = new Vector2(0, rectGo.offsetMax.y);
+        rectGo.offsetMin = new Vector2(rectGo.offsetMin.x, 0);
+        rectGo.offsetMax = new Vector2(rectGo.offsetMax.x, 0);
+
+        RectTransform rectP = pageParent.GetComponent<RectTransform>();
+        go.GetComponent<RectTransform>().sizeDelta = new Vector2(rectP.sizeDelta.x, rectP.sizeDelta.y);
 
         currentPages.Add(currentPage);
     }
