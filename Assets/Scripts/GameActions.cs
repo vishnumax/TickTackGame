@@ -11,6 +11,9 @@ namespace TictTackGame
         public static class GameActions
         {
             public static Action<GameType> levelSelect;
+            public static Action RestartAction;
+
+            public static Action StopAction;
         }
     }
 }

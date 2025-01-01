@@ -26,8 +26,9 @@ public class PageNavigator : MonoBehaviour
     private void Start()
     {
         NavAction(PageSet.Splash);
-        StatusManager.Instance.Message("Loading...");
     }
+
+ 
 
     public void NavAction(PageSet page)
     {
@@ -69,9 +70,7 @@ public class PageNavigator : MonoBehaviour
         go.SetActive(true);
 
         RectTransform rectGo = go.GetComponent<RectTransform>();
-        // rectGo.anchorMin = new Vector2(0, 0f);
-        //rectGo.anchorMax = new Vector2(0, 0f);
-
+       
         rectGo.offsetMin = new Vector2(0, rectGo.offsetMin.y);
         rectGo.offsetMax = new Vector2(0, rectGo.offsetMax.y);
         rectGo.offsetMin = new Vector2(rectGo.offsetMin.x, 0);

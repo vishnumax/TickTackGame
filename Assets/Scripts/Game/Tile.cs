@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TictTackGame.Act;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,12 +16,17 @@ public class Tile : MonoBehaviour
     Button button;
 
     [SerializeField] Image markImage;
+    public bool isMark => markImage.isActiveAndEnabled;
+
     [SerializeField] Sprite playerOne;
     [SerializeField] Sprite playerTwo;
 
     PlayerSet playerSet;
 
     [SerializeField] Vector2 pos;
+
+    public Vector2 Position => pos; 
+
 
     public ITile callback;
 
@@ -33,17 +40,29 @@ public class Tile : MonoBehaviour
 
         markImage.sprite = null;
         markImage.enabled = false;
+
+        GameActions.StopAction += StopAction;
+        GameActions.RestartAction += RestartAction;
     }
+
+    private void StopAction()
+    {
+        EnableInteract(false);
+    }
+
+    public void EnableInteract(bool enable) { button.enabled = enable;}    
 
     private void OnDisable()
     {
         button.onClick.RemoveAllListeners();
+
+        GameActions.StopAction -= StopAction;
     }
 
 
     public void SetPlayer(PlayerSet set)
     {
-        if (button == null)
+        if (button == null || markImage.isActiveAndEnabled)
             return;
 
         playerSet = set;
@@ -56,12 +75,27 @@ public class Tile : MonoBehaviour
         };
     }
 
-    void Mark()
+    public void Mark()
     {
         markImage.enabled = true;
-        button.enabled = false;
+        EnableInteract(false);
 
         callback.SetTile(playerSet, pos);
+    }
+
+
+    public void WinAction()
+    {
+        markImage.color = Color.green;
+    }
+
+    void RestartAction()
+    {
+        markImage.sprite = null;
+        markImage.enabled = false;
+        EnableInteract(true);
+
+        markImage.color = Color.white;  
     }
 
 }

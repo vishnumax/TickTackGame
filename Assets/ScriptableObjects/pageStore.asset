@@ -16,4 +16,6 @@ MonoBehaviour:
   - panel: {fileID: 28839686930915712, guid: 5bf6296f896b03a429d0533372dfa39a, type: 3}
     pageSet: 0
   - panel: {fileID: 560495542497762640, guid: e42f9e6ffa8af4f48842fa04169b15fa, type: 3}
-    pageSet: 0
+    pageSet: 1
+  - panel: {fileID: 1709035823500997190, guid: a2db3f07366d6cc488971008e894fac6, type: 3}
+    pageSet: 2
